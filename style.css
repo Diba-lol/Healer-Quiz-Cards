@@ -848,3 +848,34 @@ a.btn-pill {
     background-size: 12px;
   }
 }
+/* ---------- Duel page: fill the phone screen, no empty space ---------- */
+@media (max-width:680px) {
+  body { padding-bottom: 1.5rem; }
+
+  #duel-stage.active {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100svh - 3rem);   /* full screen height */
+  }
+
+  #duel-stage .duel-arena {
+    flex: 1;                            /* arena takes all the leftover height */
+    margin: 1rem auto;
+    width: 100%;
+  }
+
+  #duel-stage .duel-card-box .healer-card {
+    min-height: 0;
+    height: 100%;                       /* cards stretch to fill */
+    padding: 1.25rem 1rem;
+    gap: .7rem;
+  }
+
+  /* bigger content so the taller cards don't look empty */
+  #duel-stage .card-icon  { width: 48px; height: 48px; }
+  #duel-stage .card-icon svg { width: 26px; height: 26px; }
+  #duel-stage .card-title { font-size: 1.2rem; }
+  #duel-stage .card-text  { font-size: .95rem; line-height: 1.6; }
+
+  #duel-stage .btn-wrap { margin: .5rem 0 0; }
+}
