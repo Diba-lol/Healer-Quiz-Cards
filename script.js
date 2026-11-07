@@ -1,3 +1,4 @@
+
 const LIMIT = 6;
 const $ = id => document.getElementById(id);
 
@@ -5,6 +6,8 @@ const $ = id => document.getElementById(id);
 const cards = [...document.querySelectorAll("#cardsDeck .healer-card")];
 const byId = id => cards.find(c => c.dataset.id === id);
 const inner = id => byId(id).innerHTML;
+cards.forEach((c, i) => c.dataset.color = i % 5);
+const colorOf = id => byId(id).dataset.color;
 
 /* Name from index.html form (pick-cards.html?userName=...) */
 const userName = (new URLSearchParams(location.search).get("userName") || "").trim();
@@ -74,16 +77,17 @@ function duelCard(id) {
   b.type = "button";
   b.className = "healer-card";
   b.dataset.id = id;
+  b.dataset.color = colorOf(id);     // <-- add this line
   b.innerHTML = inner(id);
-  b.onclick = () => choose(id);
+  b.onclick = () => choose(id, b);
   return b;
 }
 
 let hoverArmed = false;
 function renderDuel() {
+  busy = false;
   const [a, b] = pairs[idx];
   const arena = document.querySelector(".duel-arena");
-  /* no hover effect until the mouse moves, so new cards don't flash under the pointer */
   arena.classList.add("nohover");
   if (!hoverArmed) {
     hoverArmed = true;
@@ -94,10 +98,8 @@ function renderDuel() {
   }
   $("leftDuelCard").replaceChildren(duelCard(a));
   $("rightDuelCard").replaceChildren(duelCard(b));
-  $("duelProgress").style.width = (idx / pairs.length * 100) + "%";
-  $("duelCount").textContent = `Duel ${idx + 1} of ${pairs.length}`;
+  $("duelProgress").style.setProperty("--p", (idx / pairs.length * 100) + "%");
 }
-
 function choose(winner) {
   const [a, b] = pairs[idx], loser = winner === a ? b : a;
   wins[winner]++;
@@ -129,7 +131,7 @@ function showResults() {
     ? `${userName}’s Core Values Hierarchy`
     : "Your Core Values Hierarchy";
   $("rankedCardsGrid").innerHTML = ranked.map((id, i) => `
-    <article class="healer-card result-card${i === 0 ? " selected" : ""}">
+        <article class="healer-card result-card${i === 0 ? " selected" : ""}" data-color="${colorOf(id)}">
       <div class="result-meta"><span class="rank-badge">#${i + 1}</span><span class="wins-badge">${w(wins[id])}</span></div>
       ${inner(id)}
     </article>`).join("");

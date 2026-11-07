@@ -24,7 +24,7 @@
         <img src="images/healer-logo.webp" alt="Healer logo" class="brand-logo small-logo">
         <div class="brand-title">Healer Discovery</div>
         <h1 class="hero-heading" id="selectionHeading">Pick 6 values that matter most to you</h1>
-        <p class="hero-desc">Tap a card to select or deselect it. Selected cards turn green.</p>
+        <p class="hero-desc">Tap a card to select or deselect it. Selected cards show a tick and a deeper colour.</p>
       </header>
 
       <section class="cards-deck" id="cardsDeck">
@@ -156,15 +156,18 @@
         <img src="images/healer-logo.webp" alt="Healer logo" class="brand-logo small-logo">
         <div class="kicker-line-wrap"><span class="kicker-text">Forced choice duel</span></div>
         <h1 class="hero-heading duel-heading">Which value is more important for you?</h1>
-        <div class="duel-progress-track">
-          <div id="duelProgress" class="duel-progress-fill"></div>
-        </div>
-        <p class="duel-count" id="duelCount" aria-live="polite"></p>
+        <p class="duel-instruction">Choose one value from the below two values</p>
       </header>
 
       <div class="duel-arena">
         <div class="duel-card-box" id="leftDuelCard"></div>
-        <div class="duel-divider"></div>
+
+        <div class="duel-middle">
+          <div class="duel-progress-track">
+            <div id="duelProgress" class="duel-progress-fill"></div>
+          </div>
+        </div>
+
         <div class="duel-card-box" id="rightDuelCard"></div>
       </div>
 
