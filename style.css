@@ -802,3 +802,49 @@ a.btn-pill {
   color: #0f172a;
   box-shadow: 0 6px 14px -6px rgba(var(--glow), .6);
 }
+
+/* ---------- Pick page: 2 cards side by side on phones ---------- */
+@media (max-width:460px) {
+  #cardsDeck.cards-deck {
+    grid-template-columns: repeat(2, 1fr);
+    /* overrides the 1-column rule */
+    gap: 12px;
+  }
+
+  #cardsDeck .healer-card {
+    min-height: 0;
+    padding: 1rem .8rem;
+    border-radius: 16px;
+    gap: .4rem;
+    min-width: 0;
+  }
+
+  #cardsDeck .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+  }
+
+  #cardsDeck .card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  #cardsDeck .card-title {
+    font-size: 1rem;
+  }
+
+  #cardsDeck .card-text {
+    font-size: .78rem;
+    line-height: 1.45;
+  }
+
+  /* smaller tick badge so it doesn't crowd the narrow card */
+  #cardsDeck .healer-card::after {
+    top: 8px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+    background-size: 12px;
+  }
+}
